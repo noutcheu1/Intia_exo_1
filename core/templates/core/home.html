@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+ {% block content %}
+
+<main class="justify-content-lg-center  d-flex align-items-center">
+    <div class="card mr-3" style="width: 18rem;">
+      <img class="card-img-top" src="https://placehold.co/600x400" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Personnel List</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'core:work' %}" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="https://placehold.co/600x400" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Clients List</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'core:customer' %}" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+</main>
+
+    {% endblock %}
