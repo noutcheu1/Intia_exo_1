@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 
 from core.models import Client
+
+from core.form import ClientForm
+
 
 # Create your views here.
 
@@ -24,3 +27,36 @@ class ClientView(TemplateView):
         context = {'clients': clients}
 
         return render(request, self.template_name, context)
+
+
+def post_client(request):
+    form = ClientForm()
+    if request.method == "POST":
+        form = ClientForm(request.POST or None)
+        if form.is_valid():
+            # save the form data to model
+            form.save()
+            return redirect('customer/')
+
+        context = {'form' : form}
+        return render(request, "core/editable_form.html", context)
+
+    context = {'form': form}
+    return render(request, "core/editable_form.html", context)
+
+
+def update_client(request, id):
+    client = get_object_or_404(Client, pk=id)
+    form = ClientForm(request.POST, instance=client)
+    if request.method == "POST":
+        form = ClientForm(request.POST or None)
+        if form.is_valid():
+            # save the form data to model
+            form.save()
+            return redirect('customer/')
+
+        context = {'form' : form}
+        return render(request, "core/editable_form.html", context)
+
+    context = {'form' : form}
+    return render(request, "core/editable_form.html", context)
